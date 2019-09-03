@@ -12,104 +12,44 @@ code {
     monospace;
 }
 
-.landing-image{
-  top: 5rem;
-  left: 5%;
+.navbar {
+	width: 100vw;
 }
 
-.landing-container {
-  width: 50%;
-  margin: auto;
+.phone {
+	vertical-align: top;
+	animation: slideLeft 1s ease-in;
 }
-
-.landing-image-tweets {
-  position: relative
-}
-
-
-.image-and-messages {
-  display: flex;
-  top: 0%;
-  position: relative;
-  align-content: center;
-  width: 50%;
-  margin: auto;
-}
-
-.image-and-messages div {
-  margin: 4px;
-}
-
-.test {
-  display: flex;
+.main-header {
+	align-content: center;
+	position: relative;
+	width: 100vw;
 }
 
 .tweets {
-  height: 300px;
-  margin-left: 20px;
-}
-
-.tweet{
-  z-index: 1;
-  background: blue;
-	animation-name: slideRight;
-	-webkit-animation-name: slideRight;	
-
-	animation-duration: 1s;	
-	-webkit-animation-duration: 1s;
-
-	animation-timing-function: ease-in-out;	
-	-webkit-animation-timing-function: ease-in-out;		
-
-	visibility: visible !important;	
+	position: relative;
+	left: -8%;
+	vertical-align: top;
+	top: 0;
 }
 
 @keyframes slideRight {
+	
+}
+@keyframes slideLeft {
 	0% {
-    transform: translateX(-150%);
-    left: 0px;
+		transform: translateX(40%);
+	}	
+	60% {
+		transform: translateX(-5%);
 	}
-	50%{
-		transform: translateX(8%);
-	}
-	65%{
-		transform: translateX(-4%);
-	}
-	80%{
-		transform: translateX(4%);
-	}
-	95%{
-		transform: translateX(-2%);
-	}			
 	100% {
 		transform: translateX(0%);
 	}	
 }
 
-@-webkit-keyframes slideRight {
-	0% {
-		-webkit-transform: translateX(-150%);
-	}
-	50%{
-		-webkit-transform: translateX(8%);
-	}
-	65%{
-		-webkit-transform: translateX(-4%);
-	}
-	80%{
-		-webkit-transform: translateX(4%);
-	}
-	95%{
-		-webkit-transform: translateX(-2%);
-	}			
-	100% {
-		-webkit-transform: translateX(0%);
-	}
-}
-
-
-.move-image {
-  z-index: 2;
-  transform: translate(-70%, 0px);
-  transition: transform 500ms ease-in-out;
+.landing-image {
+	position: relative;
+	animation: slideLeft 2s ease-in;
+	left: -10%;
 }

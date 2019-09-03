@@ -6,80 +6,72 @@ export default class LandingComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            initialRender: true,
-            allTweets: tweets.slice(0),
             tweetsOnScreen: []
         }
-        this.moveImage = this.moveImage.bind(this)
-        setTimeout(this.moveImage, 2000);
+        console.log(tweets)
+        this.tweets = this.shuffleTweets(tweets);
+        console.log(this.tweets);
+        this.populateTweets = this.populateTweets.bind(this);
+        this.refreshTweets = this.refreshTweets.bind(this);
+        this.refreshTweets();
+
     }
 
-
-    moveImage = () => {
-        let imageTransition = document.getElementsByClassName('landing-image');
-        imageTransition[0].addEventListener('transitionend', () => {
-            this.addTweetSection();
-        })
-        this.setState(prevState => {
-            return { initialRender: !prevState, }
-        })
-    }
-
-    addTweetSection() {
-        const tweetsPerView = 5;
-        const tweetContainerHeight = document.getElementsByClassName('move-image')[0].offsetHeight;
-        const individualTweetHeight = Math.floor(tweetContainerHeight / tweetsPerView);
-        let data = document.getElementsByClassName('test');
-        let tweetSection = document.createElement('span');
-
-        tweetSection.classList.add('tweets')
-        data[0].appendChild(tweetSection);
-
-        this.populateTweets(tweetSection, individualTweetHeight);
-    }
-
-    populateTweets(tweetSection, individualTweetHeight) {
-        addIndividualTweet = addIndividualTweet.bind(this)
-
-        let d = setInterval(addIndividualTweet, 1000, tweetSection, individualTweetHeight);
-
-        function addIndividualTweet(tweetWindow, height) {
-            let tweet = document.createElement('div');
-            tweet.classList.add('tweet')
-            tweet.style.height = height + 'px'
-            tweet.innerHTML = 'lsdjflksdjflkjskldfjlksdjklf';
-
-            tweetWindow.appendChild(tweet);
-
-            if (tweetWindow.childElementCount === 5) {
-                clearInterval(d);
-                this.destroyTweets();
-            }
-            console.log(tweetWindow.childElementCount) //works
+    refreshTweets() {
+        console.log(this.tweets);
+        let tweetBox = document.getElementsByClassName('tweets')[0];
+        let tweetCollector = [];
+        for (let i = 0; i < 5; i++) {
+            tweetCollector.push(this.tweets.pop());
         }
 
     }
 
-    destroyTweets() {
-        let destroyInterval = setInterval(destroyIndividualTweet, 1000);
+    shuffleTweets(arr) {
+        console.log(arr)
+        let index = arr.length - 1;
+        let temp, randIndex;
+        while (index !== 0) {
+            randIndex = Math.floor(Math.random() * index);
 
-        function destroyIndividualTweet() {
-
+            temp = arr[index];
+            arr[index] = arr[randIndex];
+            arr[randIndex] = temp;
+            index--;
         }
+        console.log(arr)
+        return arr
     }
 
+    populateTweets() {
+        let tweetBox = document.getElementsByClassName('tweets')[0];
+        let imageHeight = document.getElementsByClassName('phone')[0].clientHeight;
+        let tweetsToShow = 5;
+        let individualTweetHeight = imageHeight / tweetsToShow;
+
+
+    }
 
     render() {
         return (
-            <div className="landing-container">
-                <div className="image-and-messages">
-                    <span className={this.state.initialRender ? "landing-image" : "move-image"}>
-                        <div className="test">
-                            <span><img src={landingImg} alt="twitter-phone" /></span>
+            <header className="main-header">
+                <span className="landing-image">
+                    <span className="image-container"><img src={landingImg} alt="phone" className="phone" /></span>
+                </span>
+                <span className="tweets">
+                    {this.state.tweetsOnScreen.map((val, i) => {
+                        return <div key={i}>
+                            <div className="user">
+                                {val.user}
+                            </div>
+                            <div className="tweet-content">
+                                {val.tweet}
+                            </div>
                         </div>
-                    </span>
-                </div>
-            </div>
+
+                    })}
+                </span>
+            </header>
         )
     }
 }
