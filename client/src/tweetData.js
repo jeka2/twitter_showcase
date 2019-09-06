@@ -1,43 +1,48 @@
 let tweets;
 export default tweets = [
     {
-        user: 'user1',
-        tweet: 'tweet1',
+        user: '@skullmandible',
+        tweet: `most cutting thing you can say is "who's this clown ?" because it implies they're a) a clown & b) not even one of the better-known clowns`,
     },
     {
-        user: 'user2',
-        tweet: 'tweet2'
+        user: '@rorynotroy',
+        tweet: `"Um." - 1st horse that got ridden`
     },
     {
-        user: 'user3',
-        tweet: 'tweet3'
+        user: '@ch000ch',
+        tweet: `hi, grandma? can u come pick me up from my rap battle? it's over. no, i lost. he saw u drop me off & did a pretty devastating rhyme about it`
     },
     {
-        user: 'user4',
-        tweet: 'tweet4'
+        user: '@meganamram',
+        tweet: `Our scariest president was probably Rushmore, because he had four heads`
     },
     {
-        user: 'user5',
-        tweet: 'tweet5'
+        user: '@DearAnyone',
+        tweet: `"Don't worry, I'll hold your stuff.  You just worry about making friends." - Cargo Shorts`
     },
     {
-        user: 'user6',
-        tweet: 'tweet6'
+        user: '@davedittell',
+        tweet: `waiter, there's a reflection of a sad and lonely man in my soup`
     },
     {
-        user: 'user7',
-        tweet: 'tweet7'
+        user: '@BeardSpice',
+        tweet: `
+"Do you have Coke"
+No, is Pepsi okay
+"Do you have updog"
+What's updog
+"Haha not much and no Pepsi is absolutely not okay"`
     },
     {
-        user: 'user8',
-        tweet: 'tweet8'
+        user: '@briangaar',
+        tweet: `Relationships are mostly you apologizing for saying something hilarious`
     },
     {
-        user: 'user9',
-        tweet: 'tweet9'
+        user: '@AndyAsAdjective',
+        tweet: `The Roomba vacuum cleaner just beat me to a piece of popcorn I dropped on the floor & this is how the war against the machines begins.`
     },
     {
-        user: 'user10',
-        tweet: 'tweet10'
+        user: '@Simon_Barrett',
+        tweet: `Yo girl, are you a zero APR loan? Because I don't really understand your terms and you keep saying you have no interest.`
     }
 ]

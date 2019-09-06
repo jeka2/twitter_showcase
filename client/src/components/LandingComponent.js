@@ -3,76 +3,89 @@ import landingImg from '../images/landingImage.jpg';
 import tweets from '../tweetData';
 
 export default class LandingComponent extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             tweetsOnScreen: []
         }
-        console.log(tweets)
-        this.tweets = this.shuffleTweets(tweets);
-        console.log(this.tweets);
-        this.populateTweets = this.populateTweets.bind(this);
-        this.refreshTweets = this.refreshTweets.bind(this);
-        this.refreshTweets();
-
+        this.addTweets = this.addTweets.bind(this);
+        this.removeTweets = this.removeTweets.bind(this);
     }
 
-    refreshTweets() {
-        console.log(this.tweets);
-        let tweetBox = document.getElementsByClassName('tweets')[0];
-        let tweetCollector = [];
-        for (let i = 0; i < 5; i++) {
-            tweetCollector.push(this.tweets.pop());
-        }
+    componentDidMount() {
+        this.tweets = this.shuffleTweets(tweets);
+        setTimeout(this.addTweets, 2000);
+    }
 
+    componentDidUpdate() {
+        if (this.state.tweetsOnScreen.length === 5) {
+            setTimeout(this.removeTweets, 5000);
+        }
+    }
+
+    addTweets() {
+        this.setState({ tweetsOnScreen: [] })
+        const tweetsToDisplay = (this.tweets.count < 5 && this.tweets % 5 !== 0) ? this.tweets.count % 5 : 5;
+        for (let i = 0; i < tweetsToDisplay; i++) {
+            const tweetToAdd = this.tweets.pop();
+            setTimeout(() => {
+                this.setState((prevState) => {
+                    return { tweetsOnScreen: [...prevState.tweetsOnScreen, tweetToAdd] };
+                });
+            }, 400 * i)
+        }
+        if (this.tweets.length === 0) {
+            this.tweets = this.shuffleTweets(tweets);
+        }
+    }
+
+    removeTweets() {
+        let tweets = document.getElementsByClassName('tweet');
+        for (let i = 0; i < tweets.length; i++) {
+            setTimeout(() => {
+                tweets[i].classList.toggle('remove');
+            }, 400 * i)
+        }
+        setTimeout(this.addTweets, 4000);
     }
 
     shuffleTweets(arr) {
-        console.log(arr)
+        arr = arr.slice(0)
         let index = arr.length - 1;
         let temp, randIndex;
-        while (index !== 0) {
+        while (index--) {
             randIndex = Math.floor(Math.random() * index);
 
             temp = arr[index];
             arr[index] = arr[randIndex];
             arr[randIndex] = temp;
-            index--;
         }
-        console.log(arr)
-        return arr
-    }
-
-    populateTweets() {
-        let tweetBox = document.getElementsByClassName('tweets')[0];
-        let imageHeight = document.getElementsByClassName('phone')[0].clientHeight;
-        let tweetsToShow = 5;
-        let individualTweetHeight = imageHeight / tweetsToShow;
-
-
+        return arr;
     }
 
     render() {
         return (
             <header className="main-header">
                 <span className="landing-image">
-                    <span className="image-container"><img src={landingImg} alt="phone" className="phone" /></span>
+                    <img src={landingImg} alt="phone" className="phone" />
                 </span>
                 <span className="tweets">
-                    {this.state.tweetsOnScreen.map((val, i) => {
-                        return <div key={i}>
-                            <div className="user">
-                                {val.user}
-                            </div>
-                            <div className="tweet-content">
-                                {val.tweet}
-                            </div>
-                        </div>
-
-                    })}
+                    <ul>
+                        {this.state.tweetsOnScreen.map((obj, i) => {
+                            return (
+                                <li className="tweet" key={i}>
+                                    <div className="tweet-content">
+                                        {obj.tweet}
+                                    </div>
+                                    <div className="tweet-user">
+                                        {obj.user}
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    </ul>
                 </span>
             </header>
         )
     }
 }
-

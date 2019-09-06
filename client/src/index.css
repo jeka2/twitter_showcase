@@ -13,29 +13,84 @@ code {
 }
 
 .navbar {
+	text-align: center;
+	justify-content: center;
+	display: block;
+	height: 10vh;
 	width: 100vw;
 }
 
 .phone {
+	width: auto;
+	height: auto;
+	position: absolute;
+	left: 30%;
 	vertical-align: top;
 	animation: slideLeft 1s ease-in;
 }
 .main-header {
-	align-content: center;
 	position: relative;
 	width: 100vw;
 }
 
 .tweets {
+	width: 20%;
+	left: calc(30% + 396px);
 	position: relative;
-	left: -8%;
 	vertical-align: top;
+	left: 50%;
 	top: 0;
 }
 
-@keyframes slideRight {
-	
+.tweet {
+	text-align: left;
+	list-style: none;
+	height: 100px;
+	width: 80%;
+	animation: slideRight .25s ease-in;
 }
+
+.remove {
+	animation: slideBackLeft 10s ease-in;
+}
+
+.search-form {
+	height: 10%;
+	width: 100%;
+	top: 50%;
+}
+
+.searchField {
+	margin-bottom: 30%;
+}
+
+@keyframes slideRight {
+	0% {
+		opacity: 0;
+		transform: translateX(-30%);
+	}
+	100% {
+		opacity: 1;
+		transform: translate(0);
+	}
+}
+
+@keyframes slideBackLeft {
+	0% {
+		opacity: 1;
+	}
+	2.5%{
+		transform: translateX(-30%);
+		opacity: 0;
+		visibility: hidden;
+	}
+	100%{
+		transform: translateX(-30%);
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
 @keyframes slideLeft {
 	0% {
 		transform: translateX(40%);
@@ -46,10 +101,4 @@ code {
 	100% {
 		transform: translateX(0%);
 	}	
-}
-
-.landing-image {
-	position: relative;
-	animation: slideLeft 2s ease-in;
-	left: -10%;
 }
