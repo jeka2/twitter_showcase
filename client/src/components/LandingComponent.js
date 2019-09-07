@@ -6,7 +6,7 @@ export default class LandingComponent extends Component {
     constructor() {
         super();
         this.state = {
-            tweetsOnScreen: []
+            tweetsOnScreen: [],
         }
         this.addTweets = this.addTweets.bind(this);
         this.removeTweets = this.removeTweets.bind(this);
@@ -19,8 +19,12 @@ export default class LandingComponent extends Component {
 
     componentDidUpdate() {
         if (this.state.tweetsOnScreen.length === 5) {
-            setTimeout(this.removeTweets, 5000);
+            this.tweetRemove = setTimeout(this.removeTweets, 5000);
         }
+    }
+
+    componentWillUnmount() {
+
     }
 
     addTweets() {

@@ -27,6 +27,7 @@ code {
 	left: 30%;
 	vertical-align: top;
 	animation: slideLeft 1s ease-in;
+	z-index: 1;
 }
 .main-header {
 	position: relative;
@@ -42,12 +43,17 @@ code {
 	top: 0;
 }
 
+#tweets {
+	list-style: none;
+}
+
 .tweet {
 	text-align: left;
 	list-style: none;
 	height: 100px;
 	width: 80%;
 	animation: slideRight .25s ease-in;
+	z-index: -1;
 }
 
 .remove {

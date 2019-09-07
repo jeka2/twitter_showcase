@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import TweetRender from '../components/TweetRender';
 
 export default class SearchPage extends Component {
 
@@ -7,30 +8,36 @@ export default class SearchPage extends Component {
         this.state = {
             value: '',
             type: '',
-            inputBoxResults: [],
+            tweets: []
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.getTweetsFromSearchField = this.getTweetsFromSearchField.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.getTypeFromDom = this.getTypeFromDom.bind(this);
+        this.makeQuery = this.makeQuery.bind(this);
+
+        this.keyPressTimeOut = null;
     }
 
-    makeApiRequest(redirect = false) {
+    makeApiRequest(submitted = false) {
+        if (this.keyPressTimeOut) { clearTimeout(this.keyPressTimeOut); }
+
+        // the request will be made if no keystroke has been made in the 
+        // last half of a second
+        this.keyPressTimeOut = setTimeout(this.makeQuery, 500)
+    }
+
+    makeQuery() {
+        this.keyPressTimeOut = null;
         let type = this.state.type;
         let value = this.state.value;
-        if (redirect) {
-            console.log(type);
-            console.log(value);
-        }
-        else {
-            fetch(`http://localhost:5000/testAPI/?type=${type}&value=${value}`)
-                .then(res => res.json()).then(myJson => console.log(myJson))
-        }
+        fetch(`http://localhost:5000/testAPI/?type=${type}&value=${value}`)
+            .then(res => res.json()).then(tweetsCollection => {
+                this.setState({ tweets: [tweetsCollection] }, this.show)
+            });
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.makeApiRequest(true);
+    show() {
+        console.log(this.state.tweets[0])
     }
 
     getTypeFromDom(typeIndex = 0) {
@@ -58,15 +65,17 @@ export default class SearchPage extends Component {
     render() {
         return (
             <div className="search-page">
+                <div className="queryTweets">
+                    <ul className="tweet-box">
+                        <TweetRender tweets={this.state.tweets[0]} />
+                    </ul>
+                </div>
                 <div className="search-form">
-                    <form onSubmit={this.handleSubmit}>
-                        <input onChange={this.getTweetsFromSearchField} className="searchField" type="text" />
-                        <select selected="selected" name="type" id="type" className="search-type" onChange={this.handleChange}>
-                            <option value="User">User Blah</option>
-                            <option value="Tweet">Tweet Blah</option>
-                        </select>
-                        <input type="submit" value="Submit" />
-                    </form>
+                    <input onChange={this.getTweetsFromSearchField} className="searchField" type="text" />
+                    <select selected="selected" name="type" id="type" className="search-type" onChange={this.handleChange}>
+                        <option value="User">User</option>
+                        <option value="Tweet">Tweet</option>
+                    </select>
                 </div>
             </div>
         )
