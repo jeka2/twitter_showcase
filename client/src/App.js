@@ -11,19 +11,6 @@ import Navbar from './components/Navbar';
 import { Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "sdf" };
-  }
-
-  callAPI() {
-
-  }
-
-  componentDidMount() {
-    this.callAPI();
-  }
-
   render() {
     return (
       <>

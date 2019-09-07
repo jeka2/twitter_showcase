@@ -65,8 +65,8 @@ export default class SearchPage extends Component {
     render() {
         return (
             <div className="search-page">
-                <div className="queryTweets">
-                    <ul className="tweet-box">
+                <div className="tweet-box">
+                    <ul>
                         <TweetRender tweets={this.state.tweets[0]} />
                     </ul>
                 </div>

@@ -23,10 +23,6 @@ export default class LandingComponent extends Component {
         }
     }
 
-    componentWillUnmount() {
-
-    }
-
     addTweets() {
         this.setState({ tweetsOnScreen: [] })
         const tweetsToDisplay = (this.tweets.count < 5 && this.tweets % 5 !== 0) ? this.tweets.count % 5 : 5;

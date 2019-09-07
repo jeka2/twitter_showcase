@@ -56,6 +56,12 @@ code {
 	z-index: -1;
 }
 
+.tweet-box {
+	background: blue;
+	height: 200px;
+	widows: 200px;
+}
+
 .remove {
 	animation: slideBackLeft 10s ease-in;
 }
