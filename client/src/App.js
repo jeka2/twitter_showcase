@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import CoverPage from './pages/CoverPage';
 import SearchPage from './pages/SearchPage';

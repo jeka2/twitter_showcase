@@ -9,7 +9,6 @@ router.get('/', function (req, res, next) {
     const type = req.query.type;
     const value = req.query.value;
     if (type === 'User') {
-        console.log(value)
         T.get('statuses/user_timeline', { screen_name: `${value}`, count: 5, tweet_mode: "extended" }, (err, data, response) => {
             if (!err) { res.json(data); }
             else { res.json({ 'error': 'user doesn\'t exist' }) }
@@ -23,6 +22,21 @@ router.get('/', function (req, res, next) {
         }
         )
     }
+})
+
+router.get('/getUserInfo', function (req, res, next) {
+    console.log(req.query)
+    const screenName = req.query.name;
+    T.get('statuses/user_timeline', { screen_name: `${screenName}`, tweet_mode: "extended" }, (err, data, response) => {
+        if (!err) {
+            const randomTweetIndex = Math.floor(Math.random() * data.length);
+            console.log(data[randomTweetIndex]);
+            res.json(data[randomTweetIndex]);
+
+        }
+        else { res.json({ 'error': 'user doesn\'t exist' }) }
+    }
+    )
 })
 
 module.exports = router;

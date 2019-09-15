@@ -32,12 +32,8 @@ export default class SearchPage extends Component {
         let value = this.state.value;
         fetch(`http://localhost:5000/testAPI/?type=${type}&value=${value}`)
             .then(res => res.json()).then(tweetsCollection => {
-                this.setState({ tweets: [tweetsCollection] }, this.show)
+                this.setState({ tweets: [tweetsCollection] })
             });
-    }
-
-    show() {
-        console.log(this.state.tweets[0])
     }
 
     getTypeFromDom(typeIndex = 0) {
@@ -65,11 +61,9 @@ export default class SearchPage extends Component {
     render() {
         return (
             <div className="search-page">
-                <div className="tweet-box">
-                    <ul>
-                        <TweetRender tweets={this.state.tweets[0]} />
-                    </ul>
-                </div>
+                <ul className="tweet-box">
+                    <TweetRender tweets={this.state.tweets[0]} />
+                </ul>
                 <div className="search-form">
                     <input onChange={this.getTweetsFromSearchField} className="searchField" type="text" />
                     <select selected="selected" name="type" id="type" className="search-type" onChange={this.handleChange}>
