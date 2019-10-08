@@ -39,7 +39,7 @@ export default class FaveTweet extends Component {
 
                         <TweetCard lastCard={true} userInfo={this.state.userInfo[4]} />
 
-                    </div>) : 'hi'}
+                    </div>) : 'loading'}
             </>
         )
     }
