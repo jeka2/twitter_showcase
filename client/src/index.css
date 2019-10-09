@@ -162,19 +162,62 @@ code {
 	flex: 1 0 200px;
 }
 
-.card {
+.container {
 	border: 1px solid black;
 	margin-bottom: 4px;
 	width: 550px;
+	position: relative;
 }
 
-.card:hover {
+.card {
+	border: 1px solid black;
+	margin-bottom: 4px;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transition: transform 1s;
+	transform-style: preserve-3d;
+}
+
+.card>.back>.profile-picture{
+	opacity: 0;	
+}
+
+.flip {
 	transform: rotateY(180deg);
-	transition: transform .5s;
+}
+
+
+
+.flip {
+	transform: rotateY(180deg);
+}
+
+.animation>*>.profile-picture{
+	opacity: 0;
+}
+
+.flip>*>.profile-picture {
+	opacity: 0;
 }
 
 .front{
+	position: absolute;
+	width: 100%;
+	height: 100%;
 	backface-visibility: hidden;
+}
+
+.back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	transform: rotateY(180deg);
+}
+
+.card.flip {
+	transform: rotateY(180deg);
 }
 
 .background {
@@ -187,16 +230,9 @@ code {
 	padding-left: 20px;
 	position: absolute;
 	left:0;
-	top:-2vh;
+	top:50%;
 	width: 13%;
 }
-
-.fave-col-singular .card {
-	width: 30vw;
-	height: 100%;
-	margin: auto;
-}
-
 
 
 @keyframes slideRight {
@@ -250,13 +286,10 @@ code {
 		.fave-twitters{
 			display: flex;
 			flex-direction: column;
+			flex-flow: wrap;
 		}
 
-		.card {
-			width: 100vw;
-			height: 30vw;
-			background: blue;
-		}
+		
 		.show-tweet-button {
 			
 		}

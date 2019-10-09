@@ -45,14 +45,14 @@ export default class LandingComponent extends Component {
         let tweets = document.getElementsByClassName('tweet');
         for (let i = 0; i < tweets.length; i++) {
             this.timeout = setTimeout(() => {
-                tweets[i].classList.toggle('remove');
+                if (tweets[i]) { tweets[i].classList.toggle('remove'); }
             }, 400 * i)
         }
         setTimeout(this.addTweets, 4000);
     }
 
     componentWillUnmount() {
-
+        this.timeout = null;
     }
 
     shuffleTweets(arr) {
