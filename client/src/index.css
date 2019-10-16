@@ -35,11 +35,15 @@ code {
 	position: absolute;
 	background-color: rgb(39, 97, 221);
 	color: white;
-	width: 100px;
-	height: 40px;
-	top: 70%;
-	right: 40%;
+	width: 150px;
+	height: 60px;
+	top: 73%;
+	right: calc(50% - 150px / 2);
 	border-radius: 50px;
+}
+
+.show-tweet-button:hover {
+	background-color: rgb(39, 130, 221);
 }
 
 .main-header {
@@ -177,6 +181,12 @@ code {
 	position: relative;
 	transition: transform 1s;
 	transform-style: preserve-3d;
+	background-color: white;
+}
+
+.card:hover{
+	z-index: 2;
+	transform: scale(1.1);
 }
 
 .card>.back>.profile-picture{
@@ -234,6 +244,11 @@ code {
 	width: 13%;
 }
 
+.reveal-content {
+	text-align: center;
+	margin: auto;
+}
+
 
 @keyframes slideRight {
 	0% {
@@ -281,7 +296,7 @@ code {
 	
 }
 
-@media only screen and (min-width: 0px) and (max-width: 500px)
+@media only screen and (min-width: 0px) and (max-width: 1103px)
 	{
 		.fave-twitters{
 			display: flex;
@@ -291,6 +306,13 @@ code {
 
 		
 		.show-tweet-button {
-			
+			position: absolute;
+			background-color: rgb(39, 97, 221);
+			color: white;
+			width: 100px;
+			height: 40px;
+			top: 70%;
+			right: 40%;
+			border-radius: 50px;
 		}
 	}

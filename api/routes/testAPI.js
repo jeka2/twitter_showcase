@@ -4,6 +4,7 @@ const Twit = require('twit');
 const config = require('../config'); // Twitter Keys
 
 var T = new Twit(config);
+tweetCounter = {};
 
 router.get('/', function (req, res, next) {
     const type = req.query.type;
@@ -25,18 +26,33 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/getUserInfo', function (req, res, next) {
-    console.log(req.query)
     const screenName = req.query.name;
     T.get('statuses/user_timeline', { screen_name: `${screenName}`, tweet_mode: "extended" }, (err, data, response) => {
         if (!err) {
             const randomTweetIndex = Math.floor(Math.random() * data.length);
-            console.log(data[randomTweetIndex]);
             res.json(data[randomTweetIndex]);
 
         }
         else { res.json({ 'error': 'user doesn\'t exist' }) }
     }
     )
+})
+
+router.get('/randomTweetReset', function (req, res, next) {
+    tweetCounter = {};
+    res.sendStatus(200);
+})
+
+router.get('/getRandomTweet', function (req, res, next) {
+    const screenName = req.query.name;
+    T.get('statuses/user_timeline', { screen_name: `${screenName}`, tweet_mode: "extended" }, (err, data, response) => {
+        if (!err) {
+            console.log(data.length);
+            const index = Math.floor(Math.random() * data.length);
+            res.json(data[index]);
+        }
+        else { res.json({ 'error': 'user doesn\'t exist' }) }
+    })
 })
 
 module.exports = router;
