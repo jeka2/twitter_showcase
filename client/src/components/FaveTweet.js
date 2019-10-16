@@ -9,11 +9,11 @@ export default class FaveTweet extends Component {
             userInfo: [],
             cardEngaged: false
         }
-        this.flip = this.flip.bind(this);
+        this.cardToInitialState = this.cardToInitialState.bind(this);
     }
 
-    flip() {
-        const cardEngaged = !this.state.cardEngaged;
+    cardToInitialState() {
+        const cardEngaged = true;
         this.setState({ cardEngaged })
     }
 
@@ -42,14 +42,14 @@ export default class FaveTweet extends Component {
                 {this.state.userInfo.length > 0 ? (
                     <div className="fave-twitters">
 
-                        <TweetCard flip={this.flip} number={1} userInfo={this.state.userInfo[0]} />
-                        <TweetCard flip={this.flip} number={2} userInfo={this.state.userInfo[1]} />
+                        <TweetCard cardToInitialState={this.cardToInitialState} number={1} userInfo={this.state.userInfo[0]} />
+                        <TweetCard cardToInitialState={this.cardToInitialState} number={2} userInfo={this.state.userInfo[1]} />
 
 
-                        <TweetCard flip={this.flip} number={3} userInfo={this.state.userInfo[2]} />
-                        <TweetCard flip={this.flip} number={4} userInfo={this.state.userInfo[3]} />
+                        <TweetCard cardToInitialState={this.cardToInitialState} number={3} userInfo={this.state.userInfo[2]} />
+                        <TweetCard cardToInitialState={this.cardToInitialState} number={4} userInfo={this.state.userInfo[3]} />
 
-                        <TweetCard flip={this.flip} number={5} userInfo={this.state.userInfo[4]} />
+                        <TweetCard cardToInitialState={this.cardToInitialState} number={5} userInfo={this.state.userInfo[4]} />
 
                     </div>) : 'loading'}
             </>
