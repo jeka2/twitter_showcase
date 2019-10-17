@@ -7,14 +7,24 @@ export default class FaveTweet extends Component {
         super(props);
         this.state = {
             userInfo: [],
-            cardEngaged: false
+            cardFlipped: null,
+            cardEngaged: null
         }
-        this.cardToInitialState = this.cardToInitialState.bind(this);
+        this.cardFlip = this.cardFlip.bind(this);
+        this.cardFlipOnUrl = this.cardFlipOnUrl.bind(this);
+        this.resetCardFlip = this.resetCardFlip.bind(this);
     }
 
-    cardToInitialState() {
-        const cardEngaged = true;
-        this.setState({ cardEngaged })
+    cardFlip(cardNumber) {
+        this.setState({ cardEngaged: cardNumber });
+    }
+
+    cardFlipOnUrl() {
+        this.setState({ cardFlipped: this.state.cardEngaged })
+    }
+
+    resetCardFlip() {
+        this.setState({ cardFlipped: null, cardEngaged: null })
     }
 
     componentDidUpdate() {
@@ -33,24 +43,24 @@ export default class FaveTweet extends Component {
         fetch(`http://localhost:5000/testAPI/randomTweetReset`);
     }
 
-
-
     render() {
-
+        const cards = [0, 1, 2, 3, 4];
         return (
             <>
                 {this.state.userInfo.length > 0 ? (
                     <div className="fave-twitters">
-
-                        <TweetCard cardToInitialState={this.cardToInitialState} number={1} userInfo={this.state.userInfo[0]} />
-                        <TweetCard cardToInitialState={this.cardToInitialState} number={2} userInfo={this.state.userInfo[1]} />
-
-
-                        <TweetCard cardToInitialState={this.cardToInitialState} number={3} userInfo={this.state.userInfo[2]} />
-                        <TweetCard cardToInitialState={this.cardToInitialState} number={4} userInfo={this.state.userInfo[3]} />
-
-                        <TweetCard cardToInitialState={this.cardToInitialState} number={5} userInfo={this.state.userInfo[4]} />
-
+                        {cards.map(num => {
+                            return (
+                                <TweetCard key={num}
+                                    cardFlipOnUrl={this.cardFlipOnUrl}
+                                    cardFlip={this.cardFlip}
+                                    resetCardFlip={this.resetCardFlip}
+                                    cardEngaged={this.state.cardEngaged}
+                                    cardFlipped={this.state.cardFlipped}
+                                    userInfo={this.state.userInfo[num]}
+                                    number={num} />
+                            )
+                        })}
                     </div>) : 'loading'}
             </>
         )

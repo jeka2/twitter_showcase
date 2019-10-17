@@ -12,6 +12,7 @@ export default class TweetCard extends Component {
         this.showTweet = this.showTweet.bind(this);
         this.flipCardToInitialState = this.flipCardToInitialState.bind(this);
         this.linkEngaged = this.linkEngaged.bind(this);
+        this.flipCardOnUrlClick = this.flipCardOnUrlClick.bind(this);
     }
 
     showTweet() {
@@ -19,7 +20,7 @@ export default class TweetCard extends Component {
             let tweet = tweetInfo.full_text;
             const imageUrl = 'https://t.co/';
             if (tweet.includes(imageUrl)) {
-                tweet = this.findImages(tweet);
+                tweet = this.findLinksInTweet(tweet);
             }
             else { tweet = [tweet] }
             this.setState({ tweet })
@@ -31,7 +32,7 @@ export default class TweetCard extends Component {
         }
     }
 
-    findImages(tweet) {
+    findLinksInTweet(tweet) {
         const instances = (tweet.match(/https:\/\/t.co\/[^\s]+/g));
         let tweetArr = [];
         instances.forEach((el, i) => {
@@ -62,20 +63,36 @@ export default class TweetCard extends Component {
         });
     }
 
+    flipCardOnUrlClick() {
+        this.props.cardFlipOnUrl();
+    }
+
     componentDidMount() {
         const cardNumber = `.card-${this.props.number}`
         this.card = document.querySelector(cardNumber);
     }
 
-    imageHover(text) {
-        console.log(text);
-    }
-
     linkEngaged() {
+        this.props.cardFlip(this.props.number);
         this.card.removeEventListener('mouseleave', this.flipCardToInitialState);
         this.card.addEventListener('mouseenter', () => {
             this.card.addEventListener('mouseleave', this.flipCardToInitialState);
         })
+    }
+
+    componentDidUpdate() {
+        // If the hovered-on card is not the one currently flipped
+        if (this.props.cardFlipped) {
+            if (this.props.number === this.props.cardFlipped) {
+                this.flipCardToInitialState();
+                this.props.resetCardFlip();
+            }
+        }
+        else if (this.props.cardEngaged) {
+            if (this.props.number !== this.props.cardEngaged) {
+                this.card.addEventListener('mouseenter', this.flipCardOnUrlClick)
+            }
+        }
     }
 
 
