@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
         )
     }
     else if (type === "Tweet") {
-        T.get('search/tweets', { q: `${value}`, count: 5, tweet_mode: "extended", display_text_range: [0, 280] }, (err, data, response) => {
+        T.get('search/tweets', { q: `${value}`, count: 5, tweet_mode: "extended" }, (err, data, response) => {
             if (!err) { res.json(data.statuses) }
             else { res.json({ 'error': 'something went wrong' }) }
         }

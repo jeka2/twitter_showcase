@@ -18,7 +18,7 @@ export default class SearchPage extends Component {
         this.keyPressTimeOut = null;
     }
 
-    makeApiRequest(submitted = false) {
+    makeApiRequest() {
         if (this.keyPressTimeOut) { clearTimeout(this.keyPressTimeOut); }
 
         // the request will be made if no keystroke has been made in the 
@@ -65,7 +65,7 @@ export default class SearchPage extends Component {
                     <TweetRender tweets={this.state.tweets[0]} />
                 </ul>
                 <div className="search-form">
-                    <input onChange={this.getTweetsFromSearchField} className="searchField" type="text" />
+                    <input onChange={this.getTweetsFromSearchField} className="search-field" type="text" />
                     <select selected="selected" name="type" id="type" className="search-type" onChange={this.handleChange}>
                         <option value="User">User</option>
                         <option value="Tweet">Tweet</option>

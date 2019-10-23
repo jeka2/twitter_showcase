@@ -7,6 +7,9 @@ export default class TweetRender extends Component {
             tweets: this.props.tweets,
         }
     }
+    componentDidUpdate() {
+        console.log(this.props.tweets);
+    }
     render() {
         let arr = "";
         if (this.props.tweets && !this.props.tweets['error']) {
@@ -21,7 +24,7 @@ export default class TweetRender extends Component {
                                 {tweet.full_text}
                             </div>
                             <div className="tweet-user">
-                                @{tweet.user.screen_name}
+                                - @{tweet.user.screen_name}
                             </div>
                         </div>
                     </li>
