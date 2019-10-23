@@ -12,6 +12,17 @@ code {
     monospace;
 }
 
+.user-image {
+	float: left;
+	margin-right: 4px;
+}
+
+.tweet-content {
+	overflow-wrap: break-word;
+	float: left;
+	width: 40vw;
+}
+
 .navbar {
 	text-align: center;
 	justify-content: center;
@@ -20,34 +31,97 @@ code {
 	width: 100vw;
 }
 
-.phone {
-	width: auto;
-	height: auto;
+.show-tweet-button{
 	position: absolute;
-	left: 30%;
-	vertical-align: top;
-	animation: slideLeft 1s ease-in;
+	background-color: rgb(39, 97, 221);
+	color: white;
+	width: 150px;
+	height: 60px;
+	top: 73%;
+	right: calc(50% - 150px / 2);
+	border-radius: 50px;
 }
+
+.show-tweet-button:hover {
+	background-color: rgb(39, 130, 221);
+}
+
 .main-header {
-	position: relative;
-	width: 100vw;
+	width: 60vw;
+	margin: 0 auto;
+}
+
+.main-header::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+.phone-image {
+	float: left;
+	animation: slideLeft 1s ease-in;
+	z-index: 1;
 }
 
 .tweets {
-	width: 20%;
-	left: calc(30% + 396px);
-	position: relative;
+	margin-left: 400px;
+	width: 30vw;
 	vertical-align: top;
-	left: 50%;
+	left: 32%;
 	top: 0;
 }
 
-.tweet {
+.display-tweet {
+	list-style: none;
+	height: 25%;
+	width: 80vw;
 	text-align: left;
+}
+
+.tweet {
+	position: relative;
+	font-size: 1.5vw;
+	text-align: left;
+	width: 100%;
 	list-style: none;
 	height: 100px;
-	width: 80%;
 	animation: slideRight .25s ease-in;
+	z-index: -1;
+	border: 1px solid black;
+}
+
+.tweet-content {
+	width: 100%;
+	overflow-wrap: break-word;
+}
+
+.tweet-user{
+	display: block;
+	width: 100%;
+	position: absolute;
+	background: lightblue;
+	bottom: 0;
+}
+
+.landing-image {
+	display: block;
+	width: 100px;
+	height: 100px;
+}
+
+.landing-image::after {
+	content: "";
+    display: table;
+    clear: both;
+}
+
+
+.tweet-box {
+	position: relative;
+	margin: auto;
+	text-align: center;
+	height: 50vh;
+	width: 50vw;
 }
 
 .remove {
@@ -55,14 +129,125 @@ code {
 }
 
 .search-form {
-	height: 10%;
-	width: 100%;
-	top: 50%;
+	margin-top: 10vh;
+	height: 10vh;
+	width: 100vw;
+	justify-content: center;
+	text-align: center;
 }
 
 .searchField {
-	margin-bottom: 30%;
+	margin-bottom: 20%;
+	width: 60vw;
+	height: 5vh;
+	border-radius: 100px;
+	font-size: 1.5em;
+	padding-left: 1em;
 }
+
+.search-type {
+	height: 5vh;
+	width: 100%;
+	font-size: 2em;
+	background: #0084b4;
+	color: white;
+}
+
+.fave-twitters {
+	display: flex;
+	flex-flow: wrap;
+	flex-wrap: wrap;
+	flex-direction: row;
+	height: 80vh;
+	width: 100vw;
+	justify-content: space-around;
+	box-sizing: border-box;
+	flex: 1 0 200px;
+}
+
+.container {
+	border: 1px solid black;
+	margin-bottom: 4px;
+	width: 550px;
+	position: relative;
+}
+
+.card {
+	border: 1px solid black;
+	margin-bottom: 4px;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transition: transform 1s;
+	transform-style: preserve-3d;
+	background-color: white;
+}
+
+.card:hover{
+	z-index: 2;
+	transform: scale(1.1);
+}
+
+.card>.back>.profile-picture{
+	opacity: 0;	
+}
+
+.flip {
+	transform: rotateY(180deg);
+}
+
+
+
+.flip {
+	transform: rotateY(180deg);
+}
+
+.animation>*>.profile-picture{
+	opacity: 0;
+}
+
+.flip>*>.profile-picture {
+	opacity: 0;
+}
+
+.front{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+}
+
+.back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	transform: rotateY(180deg);
+}
+
+.card.flip {
+	transform: rotateY(180deg);
+}
+
+.background {
+	height: 70%;
+	width: 100%;
+}
+
+.profile-picture {
+	display: inline-block;
+	padding-left: 20px;
+	position: absolute;
+	left:0;
+	top:50%;
+	width: 13%;
+}
+
+.reveal-content {
+	text-align: center;
+	margin: auto;
+}
+
 
 @keyframes slideRight {
 	0% {
@@ -102,3 +287,31 @@ code {
 		transform: translateX(0%);
 	}	
 }
+
+@media screen and (min-width: 1000px) {
+	.tweet {
+		font-size: 100%;
+	}
+	
+}
+
+@media only screen and (min-width: 0px) and (max-width: 1103px)
+	{
+		.fave-twitters{
+			display: flex;
+			flex-direction: column;
+			flex-flow: wrap;
+		}
+
+		
+		.show-tweet-button {
+			position: absolute;
+			background-color: rgb(39, 97, 221);
+			color: white;
+			width: 100px;
+			height: 40px;
+			top: 70%;
+			right: 40%;
+			border-radius: 50px;
+		}
+	}

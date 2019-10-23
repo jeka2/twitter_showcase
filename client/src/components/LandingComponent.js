@@ -6,10 +6,11 @@ export default class LandingComponent extends Component {
     constructor() {
         super();
         this.state = {
-            tweetsOnScreen: []
+            tweetsOnScreen: [],
         }
         this.addTweets = this.addTweets.bind(this);
         this.removeTweets = this.removeTweets.bind(this);
+        this.timeout = null;
     }
 
     componentDidMount() {
@@ -19,9 +20,10 @@ export default class LandingComponent extends Component {
 
     componentDidUpdate() {
         if (this.state.tweetsOnScreen.length === 5) {
-            setTimeout(this.removeTweets, 5000);
+            this.tweetRemove = setTimeout(this.removeTweets, 5000);
         }
     }
+
 
     addTweets() {
         this.setState({ tweetsOnScreen: [] })
@@ -42,11 +44,15 @@ export default class LandingComponent extends Component {
     removeTweets() {
         let tweets = document.getElementsByClassName('tweet');
         for (let i = 0; i < tweets.length; i++) {
-            setTimeout(() => {
-                tweets[i].classList.toggle('remove');
+            this.timeout = setTimeout(() => {
+                if (tweets[i]) { tweets[i].classList.toggle('remove'); }
             }, 400 * i)
         }
         setTimeout(this.addTweets, 4000);
+    }
+
+    componentWillUnmount() {
+        this.timeout = null;
     }
 
     shuffleTweets(arr) {
@@ -66,10 +72,10 @@ export default class LandingComponent extends Component {
     render() {
         return (
             <header className="main-header">
-                <span className="landing-image">
+                <div className="phone-image">
                     <img src={landingImg} alt="phone" className="phone" />
-                </span>
-                <span className="tweets">
+                </div>
+                <div className="tweets">
                     <ul>
                         {this.state.tweetsOnScreen.map((obj, i) => {
                             return (
@@ -84,7 +90,7 @@ export default class LandingComponent extends Component {
                             )
                         })}
                     </ul>
-                </span>
+                </div>
             </header>
         )
     }
