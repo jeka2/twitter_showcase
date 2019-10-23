@@ -19,7 +19,7 @@ export default class TweetRender extends Component {
                         <div className="user-image">
                             <img src={tweet.user.profile_image_url} alt={`${tweet.user.screen_name}`} />
                         </div>
-                        <div className="tweet-content">
+                        <div className="content">
                             <div className="tweet-text">
                                 {tweet.full_text}
                             </div>
