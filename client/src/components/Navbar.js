@@ -19,13 +19,13 @@ export default class Navbar extends Component {
         return (
             <nav className="navbar">
                 <span className="home-link">
-                    <Link to="/">1</Link>
+                    <Link to="/">Home</Link>
                 </span>
                 <span className="user-search-link">
-                    <Link to="/search">2</Link>
+                    <Link to="/search">Search</Link>
                 </span>
                 <span className="random-tweet-link">
-                    <Link to="/random">3</Link>
+                    <Link to="/random">Random</Link>
                 </span>
             </nav>
         );
