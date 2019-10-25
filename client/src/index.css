@@ -130,11 +130,12 @@ code {
 }
 
 .search-form {
+	position: absolute;
 	margin-top: 20vh;
 	height: 10vh;
 	width: 100vw;
 	justify-content: center;
-	text-align: center;
+	
 }
 
 .search-field {
@@ -273,6 +274,10 @@ code {
 	.tweet-box {
 		font-size: .77rem;
 	}
+	.search-form {
+		width: 550px;
+		justify-content: left;
+	}
 }
 
 @media only screen and (min-width: 0px) and (max-width: 500px)
@@ -287,12 +292,6 @@ code {
 		}
 
 		.card {
-			width: 80vw;
-		}
-	}
-@media only screen and (min-width: 500px) and (max-width: 750px)
-	{
-		.tweet-box {
 			width: 80vw;
 		}
 	}
