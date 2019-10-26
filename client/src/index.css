@@ -130,7 +130,6 @@ code {
 }
 
 .search-form {
-	position: absolute;
 	margin-top: 20vh;
 	height: 10vh;
 	width: 100vw;
@@ -252,15 +251,11 @@ code {
 	}
 }
 
-@media screen and (min-width: 900px) and (max-width: 1000px) {
-	.tweet-box {
-		font-size: .92rem;
-	}
-}
 
-@media screen and (min-width: 800px) and (max-width: 900px) {
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
 	.tweet-box {
-		font-size: .87rem;
+		font-size: .9rem;
 	}
 }
 
@@ -280,7 +275,7 @@ code {
 	}
 }
 
-@media only screen and (min-width: 0px) and (max-width: 500px)
+@media only screen and (min-width: 0px) and (max-width: 600px)
 	{
 		.tweet-box {
 			width: 400px;

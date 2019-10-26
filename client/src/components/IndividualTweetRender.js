@@ -1,18 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 export default class IndividualTweetRender extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            profileImage: this.props.tweet.user.profile_image_url,
-            username: this.props.tweet.user.screen_name,
-            tweet: this.findLinksInTweet(this.props.tweet.full_text),
-        }
+
         this.findLinksInTweet = this.findLinksInTweet.bind(this);
     }
 
     findLinksInTweet(tweet) {
-        const instances = (tweet.match(/https:\/\/t.co\/[^\s]+/g));
+        // Separates non-links and links into different array elements
+        // So that a link tag can be added where needed
+        const instances = (tweet.match(/https?:\/\/t.co\/[^\s]+/g));
         if (!instances) { return [tweet] };
 
         let tweetArr = [];
@@ -35,24 +34,27 @@ export default class IndividualTweetRender extends Component {
     }
 
     render() {
+        const profileImage = this.props.tweet.user.profile_image_url;
+        const username = this.props.tweet.user.screen_name;
+        const tweet = this.findLinksInTweet(this.props.tweet.full_text);
         return (
             <>
                 <div className="user-image">
-                    <img src={this.state.profileImage} alt={`${this.state.profileImage}`} />
+                    <img src={profileImage} alt={`${profileImage}`} />
                 </div>
                 <div className="content">
                     <div className="tweet-text">
-                        {this.state.tweet.map((el, i) => {
-                            if (el.includes('https://t.co/')) {
+                        {tweet.map((el, i) => {
+                            if (el.includes('https://t.co/') || el.includes('http://t.co/')) {
                                 return <a href={el} key={i} target='_blank'>{el}</a>
                             }
                             else {
-                                return <span className='tweet-message' key={i}>{el}</span>
+                                return <span key={i}>{el}</span>
                             }
                         })}
                     </div>
                     <div className="tweet-user">
-                        - @{this.state.username}
+                        - @{username}
                     </div>
                 </div>
             </>
